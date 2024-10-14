@@ -1,11 +1,11 @@
 import { mount } from "@vue/test-utils";
-import component from "./TemplateSyntax01.vue"
+import component from "./01_TextInterpolation.vue"
 import { test, expect } from "vitest";
 
-test("Template Syntax 01", () => {
+test("Text Interpolation", () => {
   const wrapper = mount(component)
 
-  const span = wrapper.get('#template_syntax_01')
+  const span = wrapper.get('#text_interpolation_span')
 
   expect(span.text()).toBe("HELLO WORLD!")
 })

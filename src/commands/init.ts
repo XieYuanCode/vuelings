@@ -1,4 +1,4 @@
-import { BaseCommand } from "./index";
+import { BaseCommand } from "./index.js";
 
 interface IInitCommandOptions {
   folder: string | true | 'vuelings'

@@ -1,13 +1,14 @@
 <template>
   <!-- WARNING: Do not change span id, Because unit tests depend on it  -->
-  <span id="template_syntax_01">
+  <span id="text_interpolation_span">
     <!-- TODO: Render the `greeting` variable using template syntax-->
     <!-- Make sure to reference the ref variable `greeting` -->
+
+    <!-- Document: https://vuejs.org/guide/essentials/template-syntax.html#text-interpolation -->
     Hello World
   </span>
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
-const greeting = ref("HELLO WORLD!")
+const greeting = "HELLO WORLD!"
 </script>

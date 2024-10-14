@@ -1,9 +1,9 @@
 import { Command, program } from "commander"
-import { prompt } from "prompts"
-
+import prompts from "prompts"
+const { prompt } = prompts;
 
 interface PromptOption {
-  type: string ,
+  type: string,
   name: string,
   message: string,
   initial?: any
@@ -17,26 +17,35 @@ export interface ICommandOption {
 
 
 export abstract class BaseCommand<T = void> {
-  protected command: Command
+  protected command?: Command
+
+  private readonly commandName?: string
 
   constructor(
-    public readonly commandName: string,
+    commandName?: string,
     public options: ICommandOption[] = [],
     public description?: string
   ) {
-    this.command = program.command(this.commandName)
+    if (commandName) {
+      this.commandName = commandName;
 
-    this.options.forEach(option => {
-      this.command.option(option.flags, option.description, option.defaultValue)
-    })
+      this.command = program.command(this.commandName)
 
-    description && this.command.description(description)
-    this.command.action(this.handle.bind(this))
+      this.options.forEach(option => {
+        this.command!.option(option.flags, option.description, option.defaultValue)
+      })
+
+      description && this.command.description(description)
+      this.command.action(this.handle.bind(this))
+    } else {
+      // default action without command name
+      program.action(this.handle.bind(this))
+    }
   }
 
   abstract handle(args?: T): void
 
-  public async requestPrompt<T>(options: PromptOption) :Promise<T> {
+  public async requestPrompt<T>(options: PromptOption): Promise<T> {
     return (await prompt(options))[options.name]
   }
 }
