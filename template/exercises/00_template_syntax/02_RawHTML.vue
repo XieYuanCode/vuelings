@@ -1,5 +1,5 @@
 <template>
-  <!-- WARNING: Do not change the id of element span, Because unit tests depend on it  -->
+  <!-- WARNING: Do not change the id of any elements., Because unit tests depend on it  -->
   <!-- TODO: Render the `raw_htmlString` variable using directive: v-html -->
   <!-- Make sure HELLO WORLD! is red -->
 

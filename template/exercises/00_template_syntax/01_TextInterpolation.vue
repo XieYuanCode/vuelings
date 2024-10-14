@@ -1,5 +1,5 @@
 <template>
-  <!-- WARNING: Do not change span id, Because unit tests depend on it  -->
+  <!-- WARNING: Do not change the id of any elements., Because unit tests depend on it  -->
   <span id="text_interpolation_span">
     <!-- TODO: Render the `greeting` variable using template syntax-->
     <!-- Make sure to reference the ref variable `greeting` -->
