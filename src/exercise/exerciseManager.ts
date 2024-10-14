@@ -77,7 +77,7 @@ class ExerciseManager {
   }
 
   /**
-   * 继续下一个带进行的测验
+   * 继续下一个待进行的测验
    */
   public continueNextPendingExercise() {
     // 获取下一个待进行的的测验
