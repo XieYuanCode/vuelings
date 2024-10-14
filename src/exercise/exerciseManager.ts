@@ -37,7 +37,7 @@ class ExerciseManager {
    * @returns 
    */
   public getExercise(name: string) {
-    return this._exercises.filter(exercise => exercise.name === name);
+    return this._exercises.filter(exercise => exercise.name === name)[0];
   }
 
   /**
@@ -85,6 +85,17 @@ class ExerciseManager {
 
     // 如果成功获取，直接运行测验
     nextPendingExercise && nextPendingExercise.run()
+  }
+
+  public runExercise(name: string) {
+    const exercise = this.getExercise(name)
+
+    if (!exercise) {
+      exitWithError(`no exercise named ${colors.underline.bold.italic(name)} has been found`);
+      return;
+    }
+
+    exercise.run()
   }
 }
 
