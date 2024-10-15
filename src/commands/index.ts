@@ -22,9 +22,10 @@ export abstract class BaseCommand<T = void> {
   private readonly commandName?: string
 
   constructor(
+    protected readonly cwd: string = process.cwd(),
     commandName?: string,
     public options: ICommandOption[] = [],
-    public description?: string
+    public description?: string,
   ) {
     if (commandName) {
       this.commandName = commandName;

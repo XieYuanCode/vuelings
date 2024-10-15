@@ -24,6 +24,8 @@ class ExerciseManager {
     const exerciseSourceFiles = getExercisesSourceFiles(exercisesFolder);
 
     this._exercises = exerciseSourceFiles.map(eSF => Exercise.fromSourceFile(eSF));
+
+    console.log("Exercises: ", this._exercises.map(e => e.name));
   }
 
   /**
@@ -87,7 +89,7 @@ class ExerciseManager {
     nextPendingExercise && nextPendingExercise.run()
   }
 
-  public runExercise(name: string) {
+  public async runExercise(name: string) {
     const exercise = this.getExercise(name)
 
     if (!exercise) {
@@ -95,7 +97,7 @@ class ExerciseManager {
       return;
     }
 
-    exercise.run()
+    await exercise.run()
   }
 }
 

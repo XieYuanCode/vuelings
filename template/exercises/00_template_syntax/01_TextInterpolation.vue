@@ -6,6 +6,7 @@
 
     <!-- Document: https://vuejs.org/guide/essentials/template-syntax.html#text-interpolation -->
     Hello World
+     <!-- {{ greeting }} -->
   </span>
 </template>
 

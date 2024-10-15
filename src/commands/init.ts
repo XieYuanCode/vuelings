@@ -5,12 +5,13 @@ interface IInitCommandOptions {
 }
 
 export default class InitCommand extends BaseCommand<IInitCommandOptions> {
-  static register() {
-    return new InitCommand()
+  static register(cwd: string) {
+    return new InitCommand(cwd)
   }
 
-  constructor() {
+  constructor(cwd: string) {
     super(
+      cwd,
       "init",
       [
         {

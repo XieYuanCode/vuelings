@@ -3,6 +3,8 @@ import { updatePassedExercise } from "../db/db.js";
 import type { FSWatcher } from "node:fs"
 import { startWatchFileChanged } from "../common/watcher.js";
 import { debounce } from "../common/debounce.js";
+import { getTestFileFromVueFile } from "../common/file.js";
+import vitester from "../vitest/index.js";
 
 /**
  * 测试状态
@@ -61,6 +63,14 @@ export class Exercise {
     return path.basename(this.sourceFile, '.vue')
   }
 
+  public get testFile(): string | undefined {
+    return getTestFileFromVueFile(this.sourceFile)
+  }
+
+  public get dir(): string {
+    return path.dirname(this.sourceFile)
+  }
+
   constructor(
     public sourceFile: string,
   ) {
@@ -90,21 +100,26 @@ export class Exercise {
     this._watcher = undefined
   }
 
-  private test() {
+  private async test() {
     // TODO: call vitest api to retest vue file
     console.log("Testing Exercise", this.name);
+    if (!this.testFile) return;
+
+    const testResult = await vitester.runSingleTest(this.testFile)
+
+    console.log("testResult", testResult?.state);
   }
   /**
    * 运行测验
    */
-  public run() {
+  public async run() {
     console.log("Running Exercise: ", this.name);
     // 设置状态
     this.status = ExerciseStatus.Running
     // 初始化文件监听
-    this._initSourceFileWatcher()
+    // this._initSourceFileWatcher()
 
-    this.test()
+    await this.test()
   }
 
   /**

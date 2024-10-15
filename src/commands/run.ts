@@ -1,17 +1,17 @@
+import { greeting } from "../common/console.js";
 import { hasDotVuelingsFile } from "../common/file.js";
-import { greeting } from "../common/utils.js";
 import exerciseManager from "../exercise/exerciseManager.js";
 import { BaseCommand } from "./index.js";
 import blessed from "blessed"
 // import { createVitest } from "vitest/node"
 
 export default class RunCommand extends BaseCommand<string> {
-  static register() {
-    return new RunCommand()
+  static register(cwd: string) {
+    return new RunCommand(cwd)
   }
 
-  constructor() {
-    super("run [name]", [], "Run a single exercise. Runs the next pending exercise if the exercise name is not specified")
+  constructor(cwd: string) {
+    super(cwd, "run [name]", [], "Run a single exercise. Runs the next pending exercise if the exercise name is not specified")
   }
 
   async handle(args?: string) {
@@ -29,8 +29,8 @@ export default class RunCommand extends BaseCommand<string> {
 
     exerciseManager.init(cwd)
 
-    if(args) {
-      exerciseManager.runExercise(args)
+    if (args) {
+      await exerciseManager.runExercise(args)
     } else {
       exerciseManager.continueNextPendingExercise()
     }
