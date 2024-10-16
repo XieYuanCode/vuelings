@@ -15,8 +15,12 @@ export interface ICommandOption {
   defaultValue?: string | boolean | string[]
 }
 
-
+/**
+ * 命令的基类
+ */
 export abstract class BaseCommand<T = void> {
+  static register(cwd: string) { }
+
   protected command?: Command
 
   private readonly commandName?: string
@@ -44,8 +48,18 @@ export abstract class BaseCommand<T = void> {
     }
   }
 
+  /**
+   * 继承此类必须实现的方法
+   * 命令的主要功能实现
+   * @param args 
+   */
   abstract handle(args?: T): void
 
+  /**
+   * 提供一个 cli 交互的 api 共子类调用
+   * @param options 
+   * @returns 
+   */
   public async requestPrompt<T>(options: PromptOption): Promise<T> {
     return (await prompt(options))[options.name]
   }

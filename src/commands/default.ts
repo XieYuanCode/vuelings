@@ -16,8 +16,6 @@ export default class DefaultCommand extends BaseCommand {
       return;
     }
 
-    exerciseManager.init(this.cwd)
-
     exerciseManager.continueNextPendingExercise()
   }
 }

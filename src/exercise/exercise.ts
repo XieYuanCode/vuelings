@@ -63,19 +63,23 @@ export class Exercise {
     return path.basename(this.sourceFile, '.vue')
   }
 
+  /**
+   * 单元测试文件
+   */
   public get testFile(): string | undefined {
     return getTestFileFromVueFile(this.sourceFile)
   }
 
+  /**
+   * 测试目录
+   */
   public get dir(): string {
     return path.dirname(this.sourceFile)
   }
 
   constructor(
     public sourceFile: string,
-  ) {
-
-  }
+  ) { }
 
   /**
    * 当vue 源码变化后的回调
@@ -100,6 +104,10 @@ export class Exercise {
     this._watcher = undefined
   }
 
+  /**
+   * 运行单元测试
+   * @returns 测试结果
+   */
   private async test() {
     // TODO: call vitest api to retest vue file
     console.log("Testing Exercise", this.name);
@@ -109,6 +117,7 @@ export class Exercise {
 
     console.log("testResult", testResult?.state);
   }
+
   /**
    * 运行测验
    */

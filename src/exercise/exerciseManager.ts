@@ -13,7 +13,8 @@ class ExerciseManager {
    * @param cwd 运行目录 
    * @returns 
    */
-  public init(cwd: string) {
+  public async init(cwd: string) {
+    // 获取测试存放目录
     const exercisesFolder = getExercisesFolder(cwd)
 
     if (!exercisesFolder) {
@@ -21,8 +22,10 @@ class ExerciseManager {
       return;
     }
 
-    const exerciseSourceFiles = getExercisesSourceFiles(exercisesFolder);
+    // 获取所有符合要求的 vue 文件（源文件）
+    const exerciseSourceFiles = await getExercisesSourceFiles(exercisesFolder);
 
+    // 构建 Exercise 实例并且存入 _exercises
     this._exercises = exerciseSourceFiles.map(eSF => Exercise.fromSourceFile(eSF));
 
     console.log("Exercises: ", this._exercises.map(e => e.name));
@@ -88,6 +91,12 @@ class ExerciseManager {
     // 如果成功获取，直接运行测验
     nextPendingExercise && nextPendingExercise.run()
   }
+
+  /**
+   * 运行指定的测试
+   * @param name 测试名
+   * @returns 
+   */
 
   public async runExercise(name: string) {
     const exercise = this.getExercise(name)
