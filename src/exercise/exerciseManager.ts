@@ -18,7 +18,6 @@ class ExerciseManager {
     const exercisesFolder = getExercisesFolder(cwd)
 
     if (!exercisesFolder) {
-      exitWithError(`No exercises folders has been found in ${cwd}, please rerun ${colors.italic('vuelings init')} command`)
       return;
     }
 
