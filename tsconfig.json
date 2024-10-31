@@ -2,20 +2,20 @@
   "compilerOptions": {
     "target": "ES6",
     "module": "NodeNext",
-    "outDir": "./dist",
-    "rootDir": "./src",
+    "outDir": "./dist/",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "moduleResolution": "NodeNext",
     "declaration": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "experimentalDecorators": true
   },
   "ts-node": {
     "esm": true
   },
   "include": [
-    "src/**/*"
+    "packages/**/*"
   ],
   "exclude": [
     "node_modules",

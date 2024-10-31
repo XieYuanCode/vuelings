@@ -29,7 +29,7 @@ export default class VuelingsVitestReporter extends DefaultReporter {
    * @param errors 
    */
   onFinished(files?: RunnerTestFile[], errors?: unknown[]): void {
-    super.onFinished()
+    super.onFinished(files, errors)
 
     const taskState = files && files[0].result?.state
 
