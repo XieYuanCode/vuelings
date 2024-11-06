@@ -1,11 +1,9 @@
-export interface ITesterProvider<ExecuteResult = void> {
+
+export interface IExecuteResult {
+
+}
+export interface ITesterProvider {
   init: (cwd: string) => Promise<void>
 
-  runSingleTest: (/** TODO:exercise */) => Promise<ExecuteResult>
+  runSingleTest: (/** TODO:exercise */) => Promise<IExecuteResult>
 }
-
-export abstract class TesterProvider implements ITesterProvider {
-  async init(cwd: string) { }
-  async runSingleTest() { }
-}
-

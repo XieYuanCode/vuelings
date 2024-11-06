@@ -1,2 +1,3 @@
-export { TesterProvider, ITesterProvider } from "./tester"
-export { ReporterProvider, IReporterProvider } from "./reporter"
+export { ITesterProvider, IExecuteResult } from "./tester"
+export { IReporterProvider } from "./reporter"
+export { IEntryProvider } from "./entry"

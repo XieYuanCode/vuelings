@@ -1,9 +1,4 @@
-import "reflect-metadata"
-/**
- * @interface IEntry 入口
- * @description 主要负责定义程序入口事件
- */
-export interface IEntry {
+export interface IEntryProvider {
   onInitialize?: () => void
   onInitialized?: () => void
 }

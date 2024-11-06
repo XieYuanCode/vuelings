@@ -3,6 +3,9 @@ import type { FSWatcher } from "node:fs"
 import { startWatchFileChanged } from "../common/watcher.js";
 import { debounce } from "../common/debounce.js";
 import { getTestFileFromVueFile } from "../common/file.js";
+import { DIContainer } from "../di/container.js";
+import { ClassType } from "../decorator/factory.js";
+import { ITesterProvider } from "../model/tester.js";
 
 /**
  * 测试状态
@@ -111,8 +114,9 @@ export class Exercise {
     console.log("Testing Exercise", this.name);
     if (!this.testFile) return;
 
-    //TODO: 从 Container 获取vitester实例
-    const testResult = await vitester.runSingleTest(this.testFile)
+    const tester = DIContainer.resolve<ITesterProvider>(ClassType.TESTER)
+    if (!tester) return;
+    const testResult = await tester.runSingleTest(this.testFile)
 
     console.log("testResult", testResult?.state);
   }

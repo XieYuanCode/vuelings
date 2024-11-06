@@ -1,26 +1,27 @@
 import { Vitest, createVitest } from 'vitest/node'
-import { TesterProvider, IReporterProvider } from "@vuelings/core/model"
-import { tester } from "@vuelings/core/decorator"
+import { IReporterProvider, ITesterProvider, IExecuteResult } from "@vuelings/core/model"
+import { TesterProvider, Inject } from "@vuelings/core/di/decorators.js"
 import VuelingsVitestReporter from "./reporter.js"
+import { TYPES } from '@vuelings/core/model/types.js';
 
-@tester()
-export class VitesterProvider extends TesterProvider {
+@TesterProvider()
+export class VitesterProvider implements ITesterProvider {
   public vitestInstance?: Vitest;
 
   constructor(
-    private _reporter: IReporterProvider
-  ) {
-    super()
-  }
+    @Inject(TYPES.ReporterProvider) private _reporter: IReporterProvider
+  ) { }
 
-  async init(cwd: string): Promise<void> {
-    await super.init(cwd)
-
+  async init(cwd: string) {
     this.vitestInstance = await createVitest('test', {
       watch: true,
       dom: true,
       dir: cwd,
       reporters: [new VuelingsVitestReporter(this._reporter)]
     })
+  }
+
+  async runSingleTest() {
+    return "" as IExecuteResult
   }
 }
