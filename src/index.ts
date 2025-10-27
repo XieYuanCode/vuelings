@@ -1,12 +1,12 @@
 import { program } from "commander";
-import InitCommand from "./commands/init.js";
-import RunCommand from "./commands/run.js";
-import DefaultCommand from "./commands/default.js";
-import { initJsonData } from "./db/db.js";
-import vitester from "./vitest/index.js";
-import exerciseManager from "./exercise/exerciseManager.js";
-import { BaseCommand } from "./commands/index.js";
-import { registerCommands } from "./common/command.js";
+import InitCommand from "./commands/init.ts";
+import RunCommand from "./commands/run.ts";
+import DefaultCommand from "./commands/default.ts";
+import { initJsonData } from "./db/db.ts";
+import vitester from "./vitest/index.ts";
+import exerciseManager from "./exercise/exerciseManager.ts";
+import { BaseCommand } from "./commands/index.ts";
+import { registerCommands } from "./common/command.ts";
 
 (async () => {
   // const cwd = process.cwd()

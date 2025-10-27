@@ -16,5 +16,11 @@
     "packages/reporter",
     "packages/store",
     "packages/template"
-  ]
+  ],
+  "dependencies": {
+    "commander": "^14.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.5.2"
+  }
 }
